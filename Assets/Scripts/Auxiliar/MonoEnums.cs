@@ -42,7 +42,10 @@ namespace Assets.Scripts.Auxiliar.MonoEnums
         Box = 9,
 
         [Description("CheckPoint")]
-        CheckPoint = 10
+        CheckPoint = 10,
+
+        [Description("Spike")]
+        Sprike = 11
     };
 
     /// <summary>

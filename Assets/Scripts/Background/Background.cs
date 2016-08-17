@@ -18,7 +18,7 @@ public class Background : MonoBehaviour {
 
     public void ChangeColor()
     {
-        color = color == EColor.White ? EColor.Black : EColor.White;
+        color = (color == EColor.White) ? EColor.Black : EColor.White;
     }
 
     public EColor GetColor()
