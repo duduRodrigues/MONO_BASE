@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
         jumpForce = 6;
 
         _deathCounter = DeathCounter.Instance;
-        _lastCheckPoint = new CheckPoint(this.transform.position, 0);
+        //_lastCheckPoint = new CheckPoint(this.transform.position, 0);
         _playerController = FindObjectOfType<PlayerController>();
 
         IsWalking = false;
