@@ -5,24 +5,25 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class Player : MonoBehaviour {
 
-    private float walkingSpeed;
-    private float runningSpeed;
-    private float jumpForce;
+    private float _walkingSpeed;
+    private float _runningSpeed;
+    private float _jumpForce;
 
     private DeathCounter _deathCounter;
     private CheckPoint _lastCheckPoint;
     private PlayerController _playerController;
-
+    
     public bool IsWalking { get; set; }
     public bool IsRunning { get; set; }
     public bool IsJumping { get; set; }
     public bool IsGrounded { get; set; }
+    public bool IsDead { get; set; }
 
     // Use this for initialization
     void Start () {
-        walkingSpeed = 3;
-        runningSpeed = 5;
-        jumpForce = 6;
+        _walkingSpeed = 3;
+        _runningSpeed = 5;
+        _jumpForce = 6;
 
         _deathCounter = DeathCounter.Instance;
         //_lastCheckPoint = new CheckPoint(this.transform.position, 0);
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour {
         IsRunning = false;
         IsJumping = false;
         IsGrounded = false;
+        IsDead = false;
     }
 	
 	// Update is called once per frame
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour {
         if (!IsJumping)
         {
             Rigidbody2D rbPlayer = this.GetComponent<Rigidbody2D>();
-            rbPlayer.velocity = new Vector2(0, jumpForce);
+            rbPlayer.velocity = new Vector2(0, _jumpForce);
 
             IsJumping = true;
         }
@@ -52,14 +54,18 @@ public class Player : MonoBehaviour {
 
     public void Walk(float direction)
     {
-        transform.Translate(new Vector3(direction * walkingSpeed * Time.deltaTime, 0, 0));
+        transform.Translate(new Vector3(direction * _walkingSpeed * Time.deltaTime, 0, 0));
         IsWalking = (direction != 0);
+        IsRunning = false;
+        _Flip(direction);
     }
 
     public void Run(float direction)
     {
-        transform.Translate(new Vector3(direction * runningSpeed * Time.deltaTime, 0, 0));
+        transform.Translate(new Vector3(direction * _runningSpeed * Time.deltaTime, 0, 0));
         IsRunning = (direction != 0);
+        IsWalking = false;
+        _Flip(direction);
     }
 
     public void SetCheckpoint(CheckPoint checkPoint)
@@ -71,16 +77,32 @@ public class Player : MonoBehaviour {
     
     public void Die()
     {
-        _playerController.enabled = false;
-        _deathCounter.IncreaseDeath();
-        new WaitForSeconds(0.5f);
-        this.transform.position = _lastCheckPoint.Position;
-        _playerController.enabled = true;
+        if (!IsDead)
+        {
+            IsDead = true;
+
+            _playerController.enabled = false;
+            _deathCounter.IncreaseDeath();
+            new WaitForSeconds(0.5f);
+            this.transform.position = _lastCheckPoint.Position;
+            _playerController.enabled = true;
+
+            IsDead = false;
+        }
     }
 
     public void ResetDeaths()
     {
         _deathCounter.ResetDeaths();
+    }
+
+    private void _Flip(float direction)
+    {
+        if(direction != 0) {
+            Vector3 theScale = transform.localScale;
+            theScale.x = direction;
+            transform.localScale = theScale;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)

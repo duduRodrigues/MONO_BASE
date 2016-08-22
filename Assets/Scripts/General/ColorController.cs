@@ -5,24 +5,36 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 public class ColorController : MonoBehaviour {
 
     public EColor color;
-    private EColor _fatherColor;
-    private SpriteRenderer _spriteRenderer;
+    private EColor _actualColor;
+    private Background _background;
+    private SpriteColorController[] _childrenColorControllers;
 
-	void Start () {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        if (color == _fatherColor)
-            _spriteRenderer.enabled = true;
-        else
-            _spriteRenderer.enabled = false;
-
-	}
-
-    public void SetFatherColor(EColor fatherColor)
+    void Start()
     {
-        _fatherColor = fatherColor;
+        _background = FindObjectOfType<Background>();
+
+        if (color == EColor.Both)
+            _actualColor = ((_background.color == EColor.White) || (_background.color == EColor.Both)) ? EColor.Black : EColor.White;
+        else
+            _actualColor = color;
+
+        _childrenColorControllers = transform.GetComponentsInChildren<SpriteColorController>();
+        updateChildrenColors();
+    }
+
+    void Update()
+    {
+        if(color == EColor.Both && _actualColor == _background.color)
+        {
+            _actualColor = (_background.color == EColor.White) ? EColor.Black : EColor.White;
+            updateChildrenColors();
+        }
+
+    }
+
+    private void updateChildrenColors()
+    {
+         for (int i = 0; i < _childrenColorControllers.Length; i++)
+            _childrenColorControllers[i].SetFatherColor(_actualColor);
     }
 }
