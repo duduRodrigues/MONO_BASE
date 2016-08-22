@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
     void Start () {
         _walkingSpeed = 3;
         _runningSpeed = 5;
-        _jumpForce = 6;
+        _jumpForce = 20;
 
         _deathCounter = DeathCounter.Instance;
         //_lastCheckPoint = new CheckPoint(this.transform.position, 0);
