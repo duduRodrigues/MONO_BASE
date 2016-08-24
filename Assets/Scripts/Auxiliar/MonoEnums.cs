@@ -64,7 +64,8 @@ namespace Assets.Scripts.Auxiliar.MonoEnums
     }
     
     /// <summary>
-    /// Static class with the functions related to the MonoEnums
+    /// Static class with the functions related to the MonoEnums.
+    /// Do not need understanding
     /// </summary>
     public static class EnumHelper
     {

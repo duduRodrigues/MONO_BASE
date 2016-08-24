@@ -16,6 +16,7 @@ public class Background : MonoBehaviour {
         
 	}
 
+    //this function change the background color to the opposite color
     public void ChangeColor()
     {
         color = (color == EColor.White) ? EColor.Black : EColor.White;
