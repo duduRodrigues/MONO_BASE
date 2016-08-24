@@ -14,10 +14,16 @@ public class SpriteColorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (color == _fatherColor)
+        {
             _spriteRenderer.enabled = true;
+        }
         else
+        {
             _spriteRenderer.enabled = false;
+        }
+            
 
 	}
 
