@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     private float _walkingSpeed;
     private float _runningSpeed;
     private float _jumpForce;
+    private bool _facingRight;
+    private bool _transition;
 
     private DeathCounter _deathCounter;
     private CheckPoint _lastCheckPoint;
@@ -102,7 +104,9 @@ public class Player : MonoBehaviour {
             Vector3 theScale = transform.localScale;
             theScale.x = direction;
             transform.localScale = theScale;
+
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
