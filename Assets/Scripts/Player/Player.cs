@@ -102,7 +102,10 @@ public class Player : MonoBehaviour {
     {
         if(direction != 0) {
             Vector3 theScale = transform.localScale;
-            theScale.x = direction;
+
+            if ((theScale.x < 0 && direction > 0) || (theScale.x > 0 && direction < 0))
+                theScale.x *= -1;
+
             transform.localScale = theScale;
 
         }

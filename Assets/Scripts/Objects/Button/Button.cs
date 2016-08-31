@@ -4,7 +4,7 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class Button : MonoBehaviour {
 
-    public bool IsPressed { get; set; }
+    public bool isPressed;
     public bool IsPressedByPlayer { get; set; }
     public bool IsPressedByBox   { get; set; }
 
@@ -13,16 +13,16 @@ public class Button : MonoBehaviour {
     {
         IsPressedByPlayer = false;
         IsPressedByBox = false;
-        IsPressed = false;
+        isPressed = false;
     }
 
     // Update Is called once per frame
     void Update()
     {
-        IsPressed = (IsPressedByPlayer || IsPressedByBox);
+        isPressed = (IsPressedByPlayer || IsPressedByBox);
     }
 
-    void OnTrIggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == ETagName.Player.GetDescription())
             IsPressedByPlayer = true;
@@ -31,7 +31,7 @@ public class Button : MonoBehaviour {
             IsPressedByBox = true;
     }
 
-    void OnTrIggerExIt2D(Collider2D col)
+    void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == ETagName.Player.GetDescription())
             IsPressedByPlayer = false;
@@ -44,6 +44,6 @@ public class Button : MonoBehaviour {
     {
         IsPressedByBox = false;
         IsPressedByPlayer = false;
-        IsPressed = false;
+        isPressed = false;
     }
 }
