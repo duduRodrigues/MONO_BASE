@@ -26,8 +26,7 @@ public class CheckPoint : MonoBehaviour {
 
         if (col.tag == ETagName.Player.GetDescription())
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name) ;
-            Player monoPlayer = col.transform.gameObject.GetComponent<Player>();
+            Player monoPlayer = FindObjectOfType<Player>();
             if (monoPlayer != null)
                 monoPlayer.SetCheckpoint(this);
         }

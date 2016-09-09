@@ -30,6 +30,7 @@ public class Player : MonoBehaviour {
         _deathCounter = DeathCounter.Instance;
         //_lastCheckPoint = new CheckPoint(this.transform.position, 0);
         _playerController = FindObjectOfType<PlayerController>();
+        _lastCheckPoint = new CheckPoint(this.transform.position, 0);
 
         IsWalking = false;
         IsRunning = false;
