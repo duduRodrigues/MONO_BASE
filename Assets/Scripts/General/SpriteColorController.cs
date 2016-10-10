@@ -4,6 +4,7 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class SpriteColorController : MonoBehaviour {
 
+    [Tooltip("Color of this sprite")]
     public EColor color;
 
     private SpriteRenderer _spriteRenderer;
@@ -22,7 +23,7 @@ public class SpriteColorController : MonoBehaviour {
 
         //if the respective sprite color are equals to the 
         //actual parent color we activate the sprite
-        if (color == _parentColorController.ActualColor && color != _background.color)
+        if (color == _parentColorController.actualColor && color != _background.color)
         {
             _spriteRenderer.enabled = true;
         }

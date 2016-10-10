@@ -3,20 +3,26 @@ using System.Collections;
 
 public class MovePlataform : MonoBehaviour {
 
-    public float speed;
     public GameObject plataform;
+    public float speed;
+
+    [Header("Path")]
+    [Tooltip("Initial position of the plataform")]
     public Transform A;
+
+    [Tooltip("Final position of the plataform")]
     public Transform B;
-    public Transform destiny;
-    private int rote;
+
+    private Transform _destiny;
+    private int _rote;
 
     // Use this for initialization
     void Start()
     {
 
-        rote = 0;
+        _rote = 0;
         plataform.transform.position = A.position;
-        destiny.position = B.position;
+        _destiny = B;
 
     }
 
@@ -25,23 +31,23 @@ public class MovePlataform : MonoBehaviour {
     {
 
         float step = speed * Time.deltaTime;
-        plataform.transform.position = Vector3.MoveTowards(plataform.transform.position, destiny.position, step);
+        plataform.transform.position = Vector3.MoveTowards(plataform.transform.position, _destiny.position, step);
 
-        if (plataform.transform.position == destiny.position)
+        if (plataform.transform.position == _destiny.position)
         {
 
             //StartCoroutine(wait());
 
-            switch (rote)
+            switch (_rote)
             {
 
                 case 0:
-                    destiny.position = A.position;
-                    rote = 1;
+                    _destiny = A;
+                    _rote = 1;
                     break;
                 case 1:
-                    destiny.position = B.position;
-                    rote = 0;
+                    _destiny = B;
+                    _rote = 0;
                     break;
             }
 

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         this.gameObject.AddComponent<CheckPoint>();
         _lastCheckPoint = this.gameObject.GetComponent<CheckPoint>();
         _lastCheckPoint.index = 0;
-        _lastCheckPoint.Position = this.transform.position;
+        _lastCheckPoint.position = this.transform.position;
 
         IsWalking = false;
         IsRunning = false;
@@ -61,7 +61,9 @@ public class Player : MonoBehaviour {
 
     public void Walk(float direction)
     {
-        transform.Translate(new Vector3(direction * _walkingSpeed * Time.deltaTime, 0, 0));
+        float lookDirection = transform.localScale.x;
+
+        transform.Translate(new Vector3(direction * lookDirection * _walkingSpeed * Time.deltaTime, 0, 0));
         IsWalking = (direction != 0);
         IsRunning = false;
         _Flip(direction);
@@ -69,7 +71,9 @@ public class Player : MonoBehaviour {
 
     public void Run(float direction)
     {
-        transform.Translate(new Vector3(direction * _runningSpeed * Time.deltaTime, 0, 0));
+        float lookDirection = transform.localScale.x;
+
+        transform.Translate(new Vector3(direction * lookDirection * _runningSpeed * Time.deltaTime, 0, 0));
         IsRunning = (direction != 0);
         IsWalking = false;
         _Flip(direction);
@@ -91,7 +95,7 @@ public class Player : MonoBehaviour {
             _playerController.enabled = false;
             _deathCounter.IncreaseDeath();
             new WaitForSeconds(0.5f);
-            this.transform.position = _lastCheckPoint.Position;
+            this.transform.position = _lastCheckPoint.position;
             _playerController.enabled = true;
 
             IsDead = false;

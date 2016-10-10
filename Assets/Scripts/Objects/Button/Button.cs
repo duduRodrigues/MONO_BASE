@@ -5,45 +5,48 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 public class Button : MonoBehaviour {
 
     public bool isPressed;
-    public bool IsPressedByPlayer { get; set; }
-    public bool IsPressedByBox   { get; set; }
+
+    [HideInInspector]
+    public bool isPressedByPlayer;
+    [HideInInspector]
+    public bool isPressedByBox;
 
     // Use this for initialization
     void Start()
     {
-        IsPressedByPlayer = false;
-        IsPressedByBox = false;
+        isPressedByPlayer = false;
+        isPressedByBox = false;
         isPressed = false;
     }
 
     // Update Is called once per frame
     void Update()
     {
-        isPressed = (IsPressedByPlayer || IsPressedByBox);
+        isPressed = (isPressedByPlayer || isPressedByBox);
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == ETagName.Player.GetDescription())
-            IsPressedByPlayer = true;
+            isPressedByPlayer = true;
 
         if (col.gameObject.tag == ETagName.Box.GetDescription())
-            IsPressedByBox = true;
+            isPressedByBox = true;
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == ETagName.Player.GetDescription())
-            IsPressedByPlayer = false;
+            isPressedByPlayer = false;
 
         if (col.gameObject.tag == ETagName.Box.GetDescription())
-            IsPressedByBox = false;
+            isPressedByBox = false;
     }
 
     public void resetButton()
     {
-        IsPressedByBox = false;
-        IsPressedByPlayer = false;
+        isPressedByBox = false;
+        isPressedByPlayer = false;
         isPressed = false;
     }
 }

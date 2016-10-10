@@ -4,7 +4,9 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class BackgroundColorController : MonoBehaviour {
 
+    [Tooltip("Color of this sprite")]
     public EColor color;
+
     private Background _background;
     private SpriteRenderer _spriteRenderer;
 

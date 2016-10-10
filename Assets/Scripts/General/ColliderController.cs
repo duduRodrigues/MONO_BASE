@@ -4,6 +4,7 @@ using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class ColliderController : MonoBehaviour {
 
+    [Tooltip("Color that the sprite should exist")]
     public EColor color;
 
     private BoxCollider2D _boxCollider;
@@ -23,7 +24,7 @@ public class ColliderController : MonoBehaviour {
 
         //if the respective sprite color are equals to the 
         //actual parent color we activate the sprite
-        if (((color == _parentColorController.ActualColor) || color == EColor.Both) && color != _background.color)
+        if (((color == _parentColorController.actualColor) || color == EColor.Both) && color != _background.color)
         {
             _boxCollider.enabled = true;
         }

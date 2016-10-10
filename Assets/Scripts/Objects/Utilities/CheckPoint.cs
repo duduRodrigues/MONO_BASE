@@ -3,17 +3,15 @@ using System.Collections;
 using Assets.Scripts.Auxiliar.MonoEnums;
 
 public class CheckPoint : MonoBehaviour {
+    [Tooltip("Number of this checkpoint")]
     public int index;
-    public Vector3 Position { get; set; }
 
-    public CheckPoint(Vector3 position, int indexAux)
-    {
-        Position = position;
-        index = indexAux;
-    }
+    [HideInInspector]
+    public Vector3 position;
+
 	// Use this for initialization
 	void Start () {
-        Position = this.transform.position;
+        position = this.transform.position;
 	}
 	
 	// Update is called once per frame
