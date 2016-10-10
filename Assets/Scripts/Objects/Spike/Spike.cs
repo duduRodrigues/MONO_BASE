@@ -17,7 +17,7 @@ public class Spike : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D (Collision2D col)
+	void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.gameObject.tag == ETagName.Player.GetDescription ()) 
 		{

@@ -31,6 +31,11 @@ public class Player : MonoBehaviour {
         //_lastCheckPoint = new CheckPoint(this.transform.position, 0);
         _playerController = FindObjectOfType<PlayerController>();
 
+        this.gameObject.AddComponent<CheckPoint>();
+        _lastCheckPoint = this.gameObject.GetComponent<CheckPoint>();
+        _lastCheckPoint.index = 0;
+        _lastCheckPoint.Position = this.transform.position;
+
         IsWalking = false;
         IsRunning = false;
         IsJumping = false;
